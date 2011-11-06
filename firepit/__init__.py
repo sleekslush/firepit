@@ -13,6 +13,6 @@ class Application(object):
         MainWindow(self).show()
         Gtk.main()
 
-    def quit(self):
+    def quit(self, *args):
         # gracefully disconnect all open pyfire connections
         Gtk.main_quit()

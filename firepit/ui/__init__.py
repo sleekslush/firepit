@@ -36,22 +36,25 @@ class Window(object):
 
         return widget
 
-    def connect_signal(self, widget, signal, callback):
-        """
-        Connects the callback to the specified signal on the widget provided. The 'widget'
-        parameter can be either the string name of the widget to pull from the builder, or
-        an instance of an already constructed widget.
-        """
-        if type(widget) is str:
-            self.get_widget(widget).connect(signal, callback)
-        else:
-            widget.connect(signal, callback)
+    def resolve_widget(self, widget):
+        return self.get_widget(widget) if type(widget) is str else widget
 
     def init_ui(self):
         """
         Called by the constructor, but meant to be overridden. Add custom widgets or attach
         values and special behavior in this method.
         """
+
+    def connect_signal(self, widget, signal, callback):
+        """
+        Connects the callback to the specified signal on the widget provided. The 'widget'
+        parameter can be either the string name of the widget to pull from the builder, or
+        an instance of an already constructed widget.
+        """
+        return self.resolve_widget(widget).connect(signal, callback)
+
+    def disconnect_signal(self, widget, handler_id):
+        self.resolve_widget(widget).disconnect(handler_id)
 
     def connect_signals(self):
         """
@@ -72,5 +75,14 @@ class Dialog(Window):
         super(Dialog, self).__init__(window_name, application)
 
     def show(self):
-        self.widget.run()
+        """
+        Shows the dialog and executes the provided callback on the response.
+        """
+        response_id = self.widget.run()
+        self.on_dialog_response(response_id)
         self.widget.hide()
+
+    def on_dialog_response(self, response_id):
+        """
+        Handle the dialog response in implementing class.
+        """
