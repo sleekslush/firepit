@@ -1,10 +1,10 @@
 from distutils.core import setup
-from smores import __version__
+from firepit import __version__
 
 setup(
-    name='Smores',
+    name='Fire Pit',
     version=__version__,
     author='Craig Slusher',
     author_email='cslush@gmail.com',
-    packages=['smores']
+    packages=['firepit']
     )

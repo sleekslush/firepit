@@ -1,6 +1,6 @@
 from gi.repository import Gtk
-from smores.ui import Window
-from smores.ui.dialog import AboutDialog
+from firepit.ui import Window
+from firepit.ui.dialog import AboutDialog
 
 class MainWindow(Window):
     def __init__(self, application):

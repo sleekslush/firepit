@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from smores import Application
+from firepit import Application
 
 def parse_args():
     parser = ArgumentParser(description='A modest campfire client')
