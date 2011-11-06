@@ -52,14 +52,12 @@ class Window(object):
         Called by the constructor, but meant to be overridden. Add custom widgets or attach
         values and special behavior in this method.
         """
-        pass
 
     def connect_signals(self):
         """
         Called by the constructor, but meant to be overridden. Connect your signals in this
         method.
         """
-        pass
 
     def show(self):
         """
