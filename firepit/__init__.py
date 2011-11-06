@@ -1,4 +1,4 @@
-__version__ = '0.0.0.1'
+__version__ = '0.1'
 
 from gi.repository import Gtk
 from firepit.ui.window import MainWindow
