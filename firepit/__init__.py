@@ -1,7 +1,7 @@
-from gi.repository import Gtk
-from ui.window import MainWindow
-
 __version__ = '0.0.0.1'
+
+from gi.repository import Gtk
+from firepit.ui.window import MainWindow
 
 class Application(object):
     def __init__(self, args):

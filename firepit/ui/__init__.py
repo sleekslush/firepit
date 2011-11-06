@@ -7,6 +7,7 @@ class Window(object):
     def __init__(self, window_name, application):
         self.window_name = window_name
         self.application = application
+        self.init_ui()
         self.connect_signals()
 
     @property
@@ -46,10 +47,17 @@ class Window(object):
         else:
             widget.connect(signal, callback)
 
+    def init_ui(self):
+        """
+        Called by the constructor, but meant to be overridden. Add custom widgets or attach
+        values and special behavior in this method.
+        """
+        pass
+
     def connect_signals(self):
         """
-        Called by the constructor, but meant to be overridden. Connect
-        your signals in this method.
+        Called by the constructor, but meant to be overridden. Connect your signals in this
+        method.
         """
         pass
 

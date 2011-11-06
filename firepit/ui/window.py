@@ -1,3 +1,4 @@
+from firepit import __version__
 from firepit.ui import Window
 from firepit.ui.dialog import AboutDialog, PreferencesDialog
 from gi.repository import Gtk
@@ -5,6 +6,9 @@ from gi.repository import Gtk
 class MainWindow(Window):
     def __init__(self, application):
         super(MainWindow, self).__init__('main_window', application)
+
+    def init_ui(self):
+        self.widget.set_title(' '.join(('Fire Pit', __version__)))
 
     def connect_signals(self):
         self.connect_signal(self.widget, 'destroy', self.on_quit_event)

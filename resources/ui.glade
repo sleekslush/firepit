@@ -534,7 +534,13 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkTextView" id="textview3">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
             </child>
             <child type="tab">
               <object class="GtkLabel" id="label2">
@@ -548,7 +554,13 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkTextView" id="textview4">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
             </child>
             <child type="tab">
               <object class="GtkLabel" id="label3">
