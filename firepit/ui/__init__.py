@@ -21,7 +21,7 @@ class Window(object):
         """
         The GtkObject that represents this window.
         """
-        return self.builder.get_object(self.window_name)
+        return self.get_widget(self.window_name)
 
     def get_widget(self, name):
         """
