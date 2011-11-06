@@ -1,7 +1,6 @@
 from firepit import __version__
 from firepit.ui import Window
 from firepit.ui.dialog import AboutDialog, PreferencesDialog
-from gi.repository import Gtk
 
 class MainWindow(Window):
     def __init__(self, application):
@@ -24,4 +23,4 @@ class MainWindow(Window):
         AboutDialog(self.application).show()
 
     def on_quit_event(self, *args, **kwargs):
-        Gtk.main_quit()
+        self.application.quit()

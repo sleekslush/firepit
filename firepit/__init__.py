@@ -12,3 +12,7 @@ class Application(object):
     def start(self):
         MainWindow(self).show()
         Gtk.main()
+
+    def quit(self):
+        # gracefully disconnect all open pyfire connections
+        Gtk.main_quit()
