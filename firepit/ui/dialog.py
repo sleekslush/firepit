@@ -1,6 +1,5 @@
 from firepit import __version__
 from firepit.ui import Dialog
-from gi.repository import Gtk
 
 class AboutDialog(Dialog):
     def __init__(self, application):
@@ -15,3 +14,7 @@ class PreferencesDialog(Dialog):
 
     def on_dialog_response(self, response_id):
         pass
+
+class ConnectionDialog(Dialog):
+    def __init__(self, application):
+        super(ConnectionDialog, self).__init__('connection_dialog', application)

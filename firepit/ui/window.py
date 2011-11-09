@@ -1,10 +1,16 @@
 from firepit import __version__
 from firepit.ui import Window
 from firepit.ui.dialog import AboutDialog, PreferencesDialog
+from gi.repository import WebKit
 
 class MainWindow(Window):
     def __init__(self, application):
         super(MainWindow, self).__init__('main_window', application)
+
+    def init_ui(self):
+        webkit_view = WebKit.WebView()
+        webkit_view.load_html_string('<b>hi there!</b>', 'utf-8')
+        self.get_widget('chat_scrolled_window').add(webkit_view)
 
     def connect_signals(self):
         self.connect_signal(self.widget, 'delete-event', self.application.quit)
