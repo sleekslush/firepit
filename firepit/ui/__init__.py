@@ -5,9 +5,14 @@ class Window(object):
     __metaclass__ = ABCMeta
     
     def __init__(self, window_name, application):
+        """
+        Constructs a new Window, which is backed by the GtkWidget defined in Glade,
+        named 'window_name'.
+        """
         self.window_name = window_name
         self.application = application
-        self.init_ui()
+
+        self.prepare_ui()
         self.connect_signals()
 
     @property
@@ -39,10 +44,10 @@ class Window(object):
     def resolve_widget(self, widget):
         return self.get_widget(widget) if type(widget) is str else widget
 
-    def init_ui(self):
+    def prepare_ui(self):
         """
-        Called by the constructor, but meant to be overridden. Add custom widgets or attach
-        values and special behavior in this method.
+        Allows implementing classes to create widgets, set properties, etc. during the
+        __init__ process.
         """
 
     def connect_signal(self, widget, signal, callback):
@@ -54,12 +59,14 @@ class Window(object):
         return self.resolve_widget(widget).connect(signal, callback)
 
     def disconnect_signal(self, widget, handler_id):
+        """
+        Disconnects the signal handler_id from the specified widget.
+        """
         self.resolve_widget(widget).disconnect(handler_id)
 
     def connect_signals(self):
         """
-        Called by the constructor, but meant to be overridden. Connect your signals in this
-        method.
+        Connects signals during the __init__() of this class.
         """
 
     def show(self):
@@ -72,6 +79,9 @@ class Dialog(Window):
     __metaclass__ = ABCMeta
 
     def __init__(self, window_name, application):
+        """
+        Constructs a new Dialog instance.
+        """
         super(Dialog, self).__init__(window_name, application)
 
     def show(self):
@@ -84,5 +94,5 @@ class Dialog(Window):
 
     def on_dialog_response(self, response_id):
         """
-        Handle the dialog response in implementing class.
+        Handles the event where a dialog response was provided.
         """

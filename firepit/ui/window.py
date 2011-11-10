@@ -5,9 +5,15 @@ from gi.repository import WebKit
 
 class MainWindow(Window):
     def __init__(self, application):
+        """
+        Constructs a new MainWindow.
+        """
         super(MainWindow, self).__init__('main_window', application)
 
-    def init_ui(self):
+    def prepare_ui(self):
+        """
+        Adds a WebKit.WebView widget to the chat view.
+        """
         webkit_view = WebKit.WebView()
         webkit_view.load_html_string('<b>hi there!</b>', 'utf-8')
         self.get_widget('chat_scrolled_window').add(webkit_view)
