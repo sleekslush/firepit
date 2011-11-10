@@ -19,7 +19,6 @@ class MainWindow(Window):
         self.get_widget('chat_scrolled_window').add(webkit_view)
 
     def connect_signals(self):
-        self.connect_signal(self.widget, 'delete-event', self.application.quit)
         self.connect_signal('quit_menu_item', 'activate', self.application.quit)
         self.connect_signal('preferences_button', 'clicked', self.on_preferences_event)
         self.connect_signal('preferences_menu_item', 'activate', self.on_preferences_event)
