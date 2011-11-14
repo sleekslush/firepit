@@ -13,6 +13,9 @@ class Application(Gtk.Application):
 
         self.connect('activate', self.on_activate)
 
+    def run(self, arguments=None):
+        super(Application, self).run(arguments)
+
     def on_activate(self, application):
         main_window = MainWindow(self)
         main_window.show()

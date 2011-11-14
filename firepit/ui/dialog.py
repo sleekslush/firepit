@@ -17,11 +17,22 @@ class ConnectionDialog(Dialog):
         if response_id != Gtk.ResponseType.OK:
             return
 
-        domain = self.get_widget('campfire_domain_entry').get_text()
-        username = self.get_widget('campfire_username_entry').get_text()
-        password = self.get_widget('campfire_password_entry').get_text()
+        subdomain = self.get_widget('subdomain_entry').get_text()
+        username = self.get_widget('username_entry').get_text()
+        password = self.get_widget('password_entry').get_text()
+        enable_ssl = self.get_widget('ssl_check_button').get_active()
 
-        return CampfireConnection(domain, username, password)
+        return CampfireConnection(subdomain, username, password, enable_ssl)
+
+class PreferencesDialog(Dialog):
+    def __init__(self, application):
+        """
+        Constructs a preferences dialog.
+        """
+        super(PreferencesDialog, self).__init__(
+                'resources/preferences_dialog.glade',
+                'preferences_dialog',
+                application)
 
 class AboutDialog(Dialog):
     def __init__(self, application):
@@ -39,12 +50,29 @@ class AboutDialog(Dialog):
         """
         self.widget.set_version(__version__)
 
-class PreferencesDialog(Dialog):
-    def __init__(self, application):
-        """
-        Constructs a preferences dialog.
-        """
-        super(PreferencesDialog, self).__init__(
-                'resources/preferences_dialog.glade',
-                'preferences_dialog',
-                application)
+class MessageDialog(Gtk.MessageDialog):
+    def __init__(self, message_type, button_type, parent, title, message):
+        super(MessageDialog, self).__init__(
+                parent,
+                Gtk.DialogFlags.DESTROY_WITH_PARENT,
+                message_type,
+                button_type,
+                message)
+
+        self.set_title(title)
+
+    def run(self):
+        result = super(MessageDialog, self).run()
+        self.destroy()
+        return result
+
+class ErrorDialog(MessageDialog):
+    def __init__(self, parent, title, message, secondary_message):
+        super(ErrorDialog, self).__init__(
+                Gtk.MessageType.ERROR,
+                Gtk.ButtonsType.CLOSE,
+                parent,
+                title,
+                message)
+
+        self.format_secondary_text(secondary_message)

@@ -1,6 +1,6 @@
 from firepit import __version__
 from firepit.ui import Window
-from firepit.ui.dialog import AboutDialog, ConnectionDialog, PreferencesDialog
+from firepit.ui.dialog import AboutDialog, ConnectionDialog, ErrorDialog, PreferencesDialog
 from gi.repository import WebKit
 
 class MainWindow(Window):
@@ -76,9 +76,8 @@ class MainWindow(Window):
 
             try:
                 campfire_connection.connect()
-            except:
-                # connection error!
-                pass
+            except Exception, ex:
+                ErrorDialog(self.widget, 'Error', 'Error', ex.message).run()
             else:
                 connection_verified = True
 

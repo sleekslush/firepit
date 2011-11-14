@@ -3,7 +3,7 @@
 from firepit import Application
 
 def main():
-    Application().run(None)
+    Application().run()
 
 if __name__ == '__main__':
     main()
