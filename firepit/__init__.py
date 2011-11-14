@@ -6,15 +6,14 @@ from firepit.ui.window import MainWindow
 class Application(Gtk.Application):
     def __init__(self):
         super(Application, self).__init__(
-                application_id='org.sleekware.FirePit',
+                application_id='org.sleekware.firepit',
                 flags=Gio.ApplicationFlags.FLAGS_NONE)
+
+        self.settings = Settings()
 
         self.connect('activate', self.on_activate)
 
     def on_activate(self, application):
-        self.builder = Gtk.Builder()
-        self.builder.add_from_file('resources/ui.glade')
-
         main_window = MainWindow(self)
         main_window.show()
 
@@ -23,3 +22,7 @@ class Application(Gtk.Application):
     def quit(self, *args):
         for window in self.get_windows():
             self.remove_window(window)
+
+class Settings(Gio.Settings):
+    def __init__(self):
+        super(Settings, self).__init__('org.sleekware.firepit')

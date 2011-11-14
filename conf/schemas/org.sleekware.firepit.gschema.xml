@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.sleekware.firepit" path="/org/sleekware/firepit/">
+    <key type="b" name="show-toolbar">
+      <default>true</default>
+      <summary>Show toolbar</summary>
+      <description>Specifies whether or not to show the toolbar on the main window.</description>
+    </key>
+  </schema>
+</schemalist>

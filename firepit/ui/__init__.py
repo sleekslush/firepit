@@ -4,7 +4,7 @@ from gi.repository import Gtk
 class Window(object):
     __metaclass__ = ABCMeta
     
-    def __init__(self, window_name, application):
+    def __init__(self, glade_file, window_name, application):
         """
         Constructs a new Window, which is backed by the GtkWidget defined in Glade,
         named 'window_name'.
@@ -12,22 +12,18 @@ class Window(object):
         self.window_name = window_name
         self.application = application
 
+        self.builder = Gtk.Builder()
+        self.builder.add_from_file(glade_file)
+
         self.prepare_ui()
         self.connect_signals()
 
     @property
-    def builder(self):
-        """
-        Returns the builder object that has all the UI objects.
-        """
-        return self.application.builder
-
-    @property
     def widget(self):
         """
-        The GtkObject that represents this window.
+        Returns the widget that represents this window.
         """
-        return self.get_widget(self.window_name)
+        return self.builder.get_object(self.window_name)
 
     def get_widget(self, name):
         """
@@ -78,19 +74,19 @@ class Window(object):
 class Dialog(Window):
     __metaclass__ = ABCMeta
 
-    def __init__(self, window_name, application):
+    def __init__(self, glade_file, window_name, application):
         """
         Constructs a new Dialog instance.
         """
-        super(Dialog, self).__init__(window_name, application)
+        super(Dialog, self).__init__(glade_file, window_name, application)
 
     def show(self):
         """
         Shows the dialog and executes the provided callback on the response.
         """
         response_id = self.widget.run()
-        self.on_dialog_response(response_id)
-        self.widget.hide()
+        self.widget.destroy()
+        return self.on_dialog_response(response_id)
 
     def on_dialog_response(self, response_id):
         """
