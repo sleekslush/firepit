@@ -23,7 +23,7 @@ class Window(object):
         """
         Returns the widget that represents this window.
         """
-        return self.builder.get_object(self.window_name)
+        return self.get_widget(self.window_name)
 
     def get_widget(self, name):
         """
@@ -38,6 +38,10 @@ class Window(object):
         return widget
 
     def resolve_widget(self, widget):
+        """
+        Returns the widget from glade if widget is a string, otherwise returns
+        the widget unchanged.
+        """
         return self.get_widget(widget) if type(widget) is str else widget
 
     def prepare_ui(self):
