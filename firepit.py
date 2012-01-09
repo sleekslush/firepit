@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 from firepit import Application
 
 def main():
