@@ -10,10 +10,12 @@ class CampfireRoom(object):
     def leave(self):
         return self.room.leave()
 
+    @property
     def recent_messages(self):
         for message in self.room.recent():
             yield CampfireMessage(message)
 
-    def get_users(self):
+    @property
+    def users(self):
         for user in self.room.get_users():
             yield CampfireUser(user)

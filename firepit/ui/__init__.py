@@ -42,7 +42,7 @@ class Window(object):
         Returns the widget from glade if widget is a string, otherwise returns
         the widget unchanged.
         """
-        return self.get_widget(widget) if type(widget) is str else widget
+        return self.get_widget(widget) if isinstance(widget, basestring) else widget
 
     def prepare_ui(self):
         """
